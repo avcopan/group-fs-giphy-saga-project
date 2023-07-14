@@ -20,7 +20,17 @@ function* addFavoriteSaga(action) {
   }
 }
 
+function* removeFavoriteSaga(action) {
+  try {
+    yield axios.delete(`/api/favorite/${action.payload}`);
+    yield put({ type: "GET_FAVORITES" });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export default function* rootSaga() {
   yield takeEvery("GET_FAVORITES", getFavoritesSaga);
   yield takeEvery("ADD_FAVORITE", addFavoriteSaga);
+  yield takeEvery("REMOVE_FAVORITE", removeFavoriteSaga);
 }

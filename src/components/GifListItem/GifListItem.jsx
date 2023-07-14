@@ -5,16 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function GifListItem({ gif }) {
   const dispatch = useDispatch();
-  const favoriteGifs = useSelector(store => store.favorites);
+  const favoriteIds = useSelector((store) => store.favorites).map((g) => g.id);
 
-  useEffect(() => {
-    dispatch({ type: "GET_FAVORITES" });
-  }, []);
-
-  const addToFavorites = async () => {
-    console.log("Adding to favorites:", gif)
-    dispatch({ type: "ADD_FAVORITE", payload: gif });
-  }
+  const toggleFavorite = async () => {
+    if (favoriteIds.includes(gif.id)) {
+      dispatch({ type: "REMOVE_FAVORITE", payload: gif.id });
+    } else {
+      dispatch({ type: "ADD_FAVORITE", payload: gif });
+    }
+  };
 
   return (
     <li className="flex flex-col items-center" key={gif.id}>
@@ -23,9 +22,13 @@ export default function GifListItem({ gif }) {
         <img className="h-48 w-48 rounded-lg" src={gif.url} alt={gif.title} />
         <button
           className="absolute bg-black rounded-xl p-1 bottom-[10%] right-[10%]"
-          onClick={addToFavorites}
+          onClick={toggleFavorite}
         >
-          <IoHeartOutline className="text-white" />
+          {favoriteIds.includes(gif.id) ? (
+            <IoHeart className="text-red-500" />
+          ) : (
+            <IoHeartOutline className="text-white" />
+          )}
         </button>
       </div>
     </li>
