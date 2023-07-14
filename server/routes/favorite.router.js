@@ -1,5 +1,4 @@
 const express = require('express');
-const pool = require('../modules/pool');
 
 const router = express.Router();
 
@@ -14,7 +13,7 @@ router.post('/', (req, res) => {
 });
 
 // update given favorite with a category id
-router.put('/:favId', (req, res) => {
+router.put('/:favId', async (req, res) => {
   // req.body should contain a category_id to add to this favorite image
   res.sendStatus(200);
 });
