@@ -13,6 +13,7 @@ export default function GifListItem({ gif }) {
 
   const addToFavorites = async () => {
     console.log("Adding to favorites:", gif)
+    dispatch({ type: "ADD_FAVORITE", payload: gif });
   }
 
   return (

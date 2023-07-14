@@ -13,7 +13,7 @@ function* getFavoritesSaga() {
 
 function* addFavoriteSaga(action) {
   try {
-    yield axios.post("/api/favorite", action.paylod);
+    yield axios.post("/api/favorite", action.payload);
     yield put({ type: "GET_FAVORITES" });
   } catch (error) {
     console.error(error);
