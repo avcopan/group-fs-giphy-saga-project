@@ -2,8 +2,8 @@ import React from 'react';
 
 function App(props) {
   return (
-    <div>
-      <h1>Giphy Search!</h1>
+    <div className=''>
+      <h1 className='text-red-500'>Giphy Search!</h1>
     </div>
   );
 }
