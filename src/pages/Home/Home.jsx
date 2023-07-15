@@ -16,7 +16,6 @@ export default function Home() {
   const handleSearch = async () => {
     const results = await searchGifs(searchText);
     setSearchResults(results);
-    console.log(searchResults);
     setSearchText('');
   };
 

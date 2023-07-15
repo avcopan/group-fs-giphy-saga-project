@@ -62,7 +62,7 @@ router.post('/category/:favId', async (req, res) => {
   }
 });
 
-router.delete('/category/:favId', async (req, res) => {
+router.post('/category/delete/:favId', async (req, res) => {
   const categoryId = req.body.categoryId;
   try {
     await query.removeFavoriteCategory(req.params.favId, categoryId);

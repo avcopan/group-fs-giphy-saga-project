@@ -56,8 +56,7 @@ const getFavoriteCategories = async (favoriteId) => {
   const queryParams = [favoriteId];
   try {
     const categories = await pool.query(queryString, queryParams);
-    console.log('CATEGORIES', categories.rows);
-    return categories.rows;
+    return categories.rows.map((category) => category.name);
   } catch (error) {
     throw new Error(error);
   }

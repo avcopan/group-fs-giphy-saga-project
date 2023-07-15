@@ -17,7 +17,7 @@ export default function GifListItem({ gif, isFavorite }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col items-center" key={gif.id}>
-        <p className="text-sm">{gif.title}</p>
+        <p className="text-sm break-all max-w-[200px]">{gif.title}</p>
         <div className="h-48 w-48 relative">
           <img className="h-48 w-48 rounded-lg" src={gif.url} alt={gif.title} />
           <button
@@ -32,7 +32,7 @@ export default function GifListItem({ gif, isFavorite }) {
           </button>
         </div>
       </div>
-      <div>{isFavorite && <FavoriteCategories />}</div>
+      <div>{isFavorite && <FavoriteCategories gif={gif} />}</div>
     </div>
   );
 }

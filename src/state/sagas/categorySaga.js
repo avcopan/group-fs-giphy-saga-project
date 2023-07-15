@@ -5,7 +5,6 @@ function* getCategoriesSaga() {
   try {
     const response = yield axios.get('/api/category');
     const categories = yield response.data;
-    console.log(categories);
     yield put({ type: 'SET_CATEGORIES', payload: categories });
   } catch (error) {
     console.error(error);

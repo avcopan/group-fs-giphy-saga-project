@@ -5,7 +5,6 @@ import GifList from '../../components/GifList/GifList';
 export default function Favorite() {
   const dispatch = useDispatch();
   const { favorites, categories } = useSelector((store) => store);
-  console.log(categories);
 
   useEffect(() => {
     dispatch({ type: 'GET_FAVORITES' });

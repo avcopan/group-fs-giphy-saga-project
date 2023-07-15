@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 export default function GifList({ gifList, isFavorite }) {
   return (
     <div>
-      <ul className="flex flex-wrap gap-8 justify-center items-center">
+      <ul className="flex flex-wrap gap-8 justify-center items-start">
         {gifList.map((gif) => (
           <Fragment key={gif.id}>
             <GifListItem gif={gif} isFavorite={isFavorite} />
