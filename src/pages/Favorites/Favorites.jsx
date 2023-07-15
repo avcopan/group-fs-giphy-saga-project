@@ -14,7 +14,7 @@ export default function Favorite() {
 
   return (
     <div>
-      <GifList gifList={favorites} />
+      <GifList gifList={favorites} isFavorite />
     </div>
   );
 }
