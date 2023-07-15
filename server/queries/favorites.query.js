@@ -1,7 +1,7 @@
-const pool = require("../modules/pool");
+const pool = require('../modules/pool');
 
 const getFavorites = async () => {
-  const queryString = "SELECT * FROM favorites;";
+  const queryString = 'SELECT * FROM favorites;';
 
   try {
     const result = await pool.query(queryString);
@@ -38,8 +38,59 @@ const removeFavorite = async (id) => {
   }
 };
 
+const getFavoriteCategories = async (favoriteId) => {
+  const queryString = `
+    SELECT category.name FROM favorites
+    JOIN favorites_categories ON favorites.id = favorites_categories.favorites_id
+    JOIN category ON category.id = favorites_categories.categories_id
+    WHERE favorites.id = $1; 
+  `;
+
+  const queryParams = [favoriteId];
+  try {
+    const categories = await pool.query(queryString, queryParams);
+    console.log('CATEGORIES', categories.rows);
+    return categories.rows;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const addFavoriteCategory = async (favoriteId, categoryId) => {
+  const queryString = `
+    INSERT INTO favorites_categories 
+    (favorites_id, categories_id)
+    VALUES 
+    ($1, $2);
+  `;
+  const queryParams = [favoriteId, categoryId];
+
+  try {
+    await pool.query(queryString, queryParams);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const removeFavoriteCategory = async (favoriteId, categoryId) => {
+  const queryString = `
+    DELETE FROM favorites_categories 
+    WHERE favorites_id=$1 AND categories_id=$2;
+  `;
+  const queryParams = [favoriteId, categoryId];
+
+  try {
+    await pool.query(queryString, queryParams);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   getFavorites,
   addFavorite,
   removeFavorite,
+  getFavoriteCategories,
+  addFavoriteCategory,
+  removeFavoriteCategory,
 };
