@@ -7,7 +7,7 @@ export default function GifList({ gifList, isFavorite }) {
       <ul className="flex flex-wrap gap-8 justify-center items-center">
         {gifList.map((gif) => (
           <Fragment key={gif.id}>
-            <GifListItem gif={gif} isFavorite />
+            <GifListItem gif={gif} isFavorite={isFavorite} />
           </Fragment>
         ))}
       </ul>

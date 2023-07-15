@@ -1,12 +1,10 @@
 import { IoHeart, IoHeartOutline } from 'react-icons/io5';
-import { IoIosAddCircleOutline } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
-import toTitleCase from '../../utils/toTitleCase';
+import FavoriteCategories from '../FavoriteCategories/FavoriteCategories';
 
 export default function GifListItem({ gif, isFavorite }) {
   const dispatch = useDispatch();
   const favoriteIds = useSelector((store) => store.favorites).map((g) => g.id);
-  const categories = useSelector((store) => store.categories);
 
   const toggleFavorite = async () => {
     if (favoriteIds.includes(gif.id)) {
@@ -34,25 +32,7 @@ export default function GifListItem({ gif, isFavorite }) {
           </button>
         </div>
       </div>
-      <div>
-        {isFavorite && (
-          <div className="flex mx-2 justify-between items-center">
-            <select className="text-sm">
-              <option value="">Categories</option>
-              {categories.map((category) => {
-                return (
-                  <option key={category.id} value={category.name}>
-                    {toTitleCase(category.name)}
-                  </option>
-                );
-              })}
-            </select>
-            <button className="text-gray-600 active:scale-105 transition-all duration-300 hover:text-gray-900">
-              <IoIosAddCircleOutline size={20} />
-            </button>
-          </div>
-        )}
-      </div>
+      <div>{isFavorite && <FavoriteCategories />}</div>
     </div>
   );
 }

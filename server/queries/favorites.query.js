@@ -5,7 +5,14 @@ const getFavorites = async () => {
 
   try {
     const result = await pool.query(queryString);
-    return result.rows;
+    const resultWithCategories = Promise.all(
+      result.rows.map(async (favorite) => {
+        const categoriesResult = await getFavoriteCategories(favorite.id);
+        favorite.categories = categoriesResult;
+        return favorite;
+      })
+    );
+    return resultWithCategories;
   } catch (error) {
     throw new Error(error);
   }
