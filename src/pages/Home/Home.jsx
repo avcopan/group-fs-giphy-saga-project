@@ -1,22 +1,23 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { searchGifs } from "../../api/request";
-import GifList from "../../components/GifList/GifList";
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { searchGifs } from '../../api/request';
+import GifList from '../../components/GifList/GifList';
 
 export default function Home() {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: "GET_FAVORITES" });
+    dispatch({ type: 'GET_FAVORITES' });
+    dispatch({ type: 'GET_CATEGORIES' });
   }, []);
 
   const handleSearch = async () => {
     const results = await searchGifs(searchText);
     setSearchResults(results);
     console.log(searchResults);
-    setSearchText("");
+    setSearchText('');
   };
 
   return (
